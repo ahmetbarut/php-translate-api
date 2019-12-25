@@ -1,0 +1,13 @@
+{
+    "name": "ahmet/translate",
+    "type": "library",
+    "license": "GPL",
+    "description": "",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "AhmetBarut\\Translate\\" : "src/"
+        }
+    }
+}
