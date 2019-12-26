@@ -50,12 +50,8 @@ class Translate {
         }
         $returnText = $this->getText($text,$sl,$tl);
 
-        return  
-            [
-               'all' => "\033[31m --------------------------------------------------------------------\n\00
-                        ==>\33[37m " . $returnText['translatedText'] . "\n",
-                'only_text' => $returnText['translatedText']
-            ];
+        return $returnText['translatedText'];
+            
         
     }
 
