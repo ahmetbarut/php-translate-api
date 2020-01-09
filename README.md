@@ -7,8 +7,8 @@
 ```
   <?php
       require_once "vendor/autoload.php";
-      use ahmetbarut/translate-api;
-      $translate = new translate-api;
+      use ahmetbarut/GTranslate-api;
+      $translate = new GTranslate-api;
   
       $translate->getText("hello","en","tr")["translatedText"]; \\ Merahaba
       ?>
