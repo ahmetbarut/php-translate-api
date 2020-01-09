@@ -8,7 +8,7 @@
  * @date 		24.12.2019
  **/
 
-namespace AhmetBarut\Translate;
+namespace ahmetbarut\GTranslate;
 
 
 class Translate {
