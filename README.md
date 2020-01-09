@@ -6,10 +6,9 @@
 
 ```
   <?php
-      require_once "vendor/autoload.php";
-      use ahmetbarut/GTranslate/Translate;
+      require_once "./vendor/autoload.php";
+      use ahmetbarut\GTranslate\Translate;
       $translate = new Translate;
-  
-      $translate->getText("hello","en","tr")["translatedText"]; \\ Merahaba
-      ?>
+      echo $translate->getText("hello")["translatedText"];
+   
 ```
