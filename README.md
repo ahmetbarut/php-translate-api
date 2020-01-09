@@ -6,11 +6,11 @@
 <br><br><br>
 <b>Kullanım</b>
 <code style="padding:20px">
-  <?php 
+  \<?php 
       require_once "vendor/autoload.php";
       use ahmetbarut/translate-api;
       $translate = new translate-api;
   
       $translate->getText("hello","en","tr")["translatedText"]; \\ Merahaba
-      ?>
+      \?>
 </code>
