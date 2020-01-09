@@ -7,11 +7,11 @@
 <b>Kullanım</b>
 <br>
 <code style="padding:20px">
-  \<?php 
-      require_once "vendor/autoload.php";
-      use ahmetbarut/translate-api;
-      $translate = new translate-api;
-  
+  \<?php<br>
+      require_once "vendor/autoload.php";<br>
+      use ahmetbarut/translate-api;<br>
+      $translate = new translate-api;<br>
+  <br>
       $translate->getText("hello","en","tr")["translatedText"]; \\ Merahaba
       \?>
 </code>
