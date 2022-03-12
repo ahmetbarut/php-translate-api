@@ -1,4 +1,4 @@
-# Google Translate Terminal
+# Google Translate With Terminal
 
 This package allows you to translate from the terminal.
 
