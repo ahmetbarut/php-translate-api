@@ -1,67 +1,85 @@
-<?php 
+<?php
 
-/**
- * Class 		Translate Api
- * @category	PHP Translate Bot
- * @author		Ahmet Barut
- * @mail 		ahmetbarut588@gmail.com
- * @date 		24.12.2019
- **/
+namespace AhmetBarut\GoogleTranslate;
 
-namespace ahmetbarut\GTranslate;
+use Exception;
+use function Termwind\{render};
 
+class Translate
+{
+    private $url = "https://translate.googleapis.com/translate_a/single?client=gtx";
 
-class Translate {
-    private $url = "https://translate.googleapis.com/translate_a/single?client=gtx&";
+    protected array $arguments;
 
-    /**
-     * @Param String
-     * @return ArrayData
-     */
-    public function getText($text,$sourceLang = 'en',$targetLang = 'tr')
+    protected string $style;
+
+    public function __construct($argument)
     {
-        $returnData = json_decode(file_get_contents($this->url . 'sl=' . $sourceLang . '&tl=' . $targetLang . '&dt=t&q=' . $this->slug($text)),true);
-        
-        return [
-                'translatedText' => $returnData[0][0][0],
-                'sourceText' => $returnData[0][0][1],
-                'sourceLang'=> $sourceLang,
-                'targetLang'=> $targetLang,
-                ];
+        array_shift($argument);
+        $this->arguments = $argument;
+        $this->setStyle("px-3 text-black bg-green-600");
     }
 
-    /* 
-        * Terminal Colors       
-    */
-
-    public function terminalTranslate($argv)
+    /**
+     * @param string $text
+     * @param string $sourceLang
+     * @param string $targetLang
+     * @return array
+     */
+    public function translate(string $text, ?string $sourceLang = 'en', ?string $targetLang = 'tr'): array
     {
-        array_shift($argv);
-        if(count($argv) >0){
-            @$sl = $argv[0];
-            @$tl = $argv[1];
-            unset($argv[0]);
-            unset($argv[1]);
-            $text = implode(' ', $argv);
-        }else{
+        $translatedData = json_decode(
+            file_get_contents(
+                sprintf(
+                    "%s&sl=%s&tl=%s&dt=t&q=%s",
+                    $this->url,
+                    $sourceLang,
+                    $targetLang,
+                    $this->createQueryString($text)
+                )
+            ),
+            true
+        );
+        return [
+            'translatedText' => $translatedData[0][0][0],
+            'sourceText' => $translatedData[0][0][1],
+            'sourceLang' => $sourceLang,
+            'targetLang' => $targetLang,
+        ];
+    }
+
+    public function terminalTranslate()
+    {
+
+        if (count($this->arguments) == 0) {
             $sl = readline("\033[32m Metin Dili => ");
             $tl = readline("\033[32m Çevirmek İstediğiniz Dil => ");
             $text = readline("\033[32m Çevrilecek :\n ==> ");
         }
-        $returnText = $this->getText($text,$sl,$tl);
 
-        return $returnText['translatedText'];
-            
-        
+        if (count($this->arguments) >= 2) {
+            $sl = $this->arguments[2] ?? 'en';
+            $tl = $this->arguments[0];
+            $text = $this->arguments[1];
+        }
+
+        if (isset($text) && isset($tl)) {
+            return render('
+            <div>
+                <div class="' . $this->style . '">' . $this->translate($text, $sl, $tl)['translatedText'] . '</div>
+            </div>
+        ');
+        }
+        throw new Exception('Arguments not found');
     }
 
-    public function slug($text,$slug='+')
+    protected function createQueryString($text, $slug = '+')
     {
-        for ($i = 0; $i<strlen($text); $i++){
-            if ( $text[$i] == ' '){
-                $text[$i] = $slug;
-            }
-        }
-        return $text;
+        return str_replace(" ", $slug, $text);
+    }
+
+    public function setStyle(string $style)
+    {
+        $this->style = $style;
     }
 }

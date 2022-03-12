@@ -1,14 +1,20 @@
-**Kurulum**
-```
-  composer require ahmetbarut/php-translate-api:dev-master
-```
-**Kullanım**
+# Google Translate Terminal
 
+This package allows you to translate from the terminal.
+
+```shell
+  composer global require ahmetbarut/php-translate-api
 ```
-  <?php
-      require_once "./vendor/autoload.php";
-      use ahmetbarut\GTranslate\Translate;
-      $translate = new Translate;
-      echo $translate->getText("hello")["translatedText"];
-   
+
+## Usage
+
+```shell
+  ~/.composer/vendor/bin/translate tr "Hello"
+  # Merhaba
 ```
+
+### Parameters
+
+- `tr`: The language code.
+- `text`: The text to translate.
+- `en` : Source language code.

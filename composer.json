@@ -1,13 +1,19 @@
 {
-    "name": "ahmet/translate",
-    "type": "library",
+    "name": "ahmetbarut/google-translate",
+    "type": "package",
     "license": "MIT",
     "description": "",
-    "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "php": "7.4 || ^8.0",
+        "nunomaduro/termwind": "^1.6"
+    },
     "autoload": {
         "psr-4": {
-            "ahmetbarut\\GTranslate\\" : "src/"
+            "AhmetBarut\\GoogleTranslate\\" : "src/"
         }
-    }
+    },
+    "require-dev": {
+        "symfony/var-dumper": "*"
+    },
+    "bin": "bin/translate"
 }

@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+
+<?php
+
+use AhmetBarut\GoogleTranslate\Translate;
+
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require __DIR__ . '/../../../autoload.php';
+} else {
+    require __DIR__ . '/../vendor/autoload.php';
+}
+
+$translate = new Translate($argv);
+
+echo $translate->terminalTranslate();
